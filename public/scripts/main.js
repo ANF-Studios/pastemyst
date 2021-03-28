@@ -1,18 +1,17 @@
 import { getWordwrap, getFullwidth } from "./helpers/options.js";
 
-    if (localStorage.getItem("theme") === null)
+    let theme = localStorage.getItem("theme");
+    if (theme === null)
     {
         localStorage.setItem("theme", "myst");
+        theme = "myst";
     }
     else
     {
-        const themePicker = document.getElementById("theme-picker");
-        const theme = localStorage.getItem("theme");
-
-        themePicker.value = theme;
+        document.getElementById("theme-picker").value = theme;
     }
 
-    setTheme();
+    setTheme(theme);
 
 window.addEventListener("load", () =>
 {
@@ -116,10 +115,8 @@ function setThemeEvent(e)
     setTheme();
 }
 
-function setTheme()
+function setTheme(theme = localStorage.getItem("theme"))
 {
-    const theme = localStorage.getItem("theme");
-
     let editorElements = document.querySelectorAll(".CodeMirror");
 
     for (let i = 0; i < editorElements.length; i++)
